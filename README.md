@@ -71,6 +71,17 @@ S2C model adaptation
 ```
 python train_stable_st.py -cfg configs/deeplabv2_r101_stable_st_synthia.yaml OUTPUT_DIR results/synthia_stable_st/ resume ./pretrain/S2C_model_iter020000.pth
 ```
+G2B model adaptation
+
+```
+python train_stable_st.py -cfg configs/deeplabv2_r101_stable_st_BDD.yaml OUTPUT_DIR results/BDD_stable_st/ resume ./pretrain/G2C_model_iter020000.pth
+```
+
+C2A (Cityscapes -> ACDC) model adaptation
+
+```
+python train_stable_st.py -cfg configs/deeplabv2_r101_stable_st_ACDC.yaml OUTPUT_DIR results/ACDC_stable_st/ resume ./pretrain/Cityscaes_model_iter020000.pth
+```
 
 ### Evaluate
 ```
