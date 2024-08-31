@@ -1,7 +1,8 @@
 # Stable-ST
 Stable Self-Training for Source-Free Domain Adaptive Semantic Segmentation
 
-This is a [pytorch](http://pytorch.org/) implementation of Stable-ST. 
+This is a pytorch implementation of Stable-ST. 
+
 Stable-ST, a unified framework based on stable sample self-training, incorporates two key technologies: [Dynamic Teacher Update](https://openaccess.thecvf.com/content/CVPR2023/html/Zhao_Towards_Better_Stability_and_Adaptability_Improve_Online_Self-Training_for_Model_CVPR_2023_paper.html)(CVPR-23 Highlight) and [Stable Neighbor Denoising](https://openaccess.thecvf.com/content/CVPR2024/papers/Zhao_Stable_Neighbor_Denoising_for_Source-free_Domain_Adaptive_Segmentation_CVPR_2024_paper.pdf)(CVPR-24). 
 
 ### New perspective
