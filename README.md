@@ -76,7 +76,5 @@ python train_stable_st.py -cfg configs/deeplabv2_r101_stable_st_synthia.yaml OUT
 ```
 python test.py -cfg configs/deeplabv2_r101_stable_st.yaml resume results/gta_stable_st/model_iter020000.pth
 ```
-Our trained model and the training logs are available via [DTST-training-logs-and weights](https://drive.google.com/drive/folders/1ML3_6MyDOnlUR7_S2rj1J4Z82v16WZGa?usp=drive_link).
-
 
 - 
