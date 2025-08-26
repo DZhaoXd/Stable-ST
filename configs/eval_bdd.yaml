@@ -1,0 +1,29 @@
+MODEL:
+  NAME: "segformer_mitbx"
+  WEIGHTS:
+  FREEZE_BN: True
+  UNCERTAINTY: 0.5
+  POS: [ 0,1,2,3,4,5 ]
+DATASETS:
+  SOURCE_TRAIN: "gta5_train"
+  TEST: "bdd_val"
+  #TEST: "gta5_val"
+INPUT:
+  SOURCE_INPUT_SIZE_TRAIN: (1024, 512)
+  INPUT_SCALES_TRAIN: (0.75, 1.25)
+  #INPUT_SIZE_TEST: (1280, 760)
+  INPUT_SIZE_TEST: (1024, 512)
+  BRIGHTNESS: 0.5
+  CONTRAST: 0.5
+  SATURATION: 0.5
+  HUE: 0.2
+SOLVER:
+  BASE_LR: 5e-4
+  MAX_ITER: 61250
+  STOP_ITER: 40000
+  BATCH_SIZE: 4
+resume: ./results/mitb5_PhotoDistort/model_iter024000.pth
+stride: (512,1024)
+crop_size: (512, 1024)
+
+
