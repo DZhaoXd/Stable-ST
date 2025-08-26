@@ -65,28 +65,40 @@ Then, put these *.pth into the pretrain folder.
 ### Train
 G2C model adaptation
 ```
-python train_stable_st.py -cfg configs/deeplabv2_r101_stable_st.yaml OUTPUT_DIR results/gta_stable_st/ resume pretrain/G2C_model_iter020000.pth
+python train_stable_st.py -cfg configs/deeplabv2_r101_StableST_G2C.yaml OUTPUT_DIR results/G2C_StableST/ resume pretrain/G2C_model_iter020000.pth 
 ```
 S2C model adaptation
 
 ```
-python train_stable_st.py -cfg configs/deeplabv2_r101_stable_st_synthia.yaml OUTPUT_DIR results/synthia_stable_st/ resume ./pretrain/S2C_model_iter020000.pth
+python train_stable_st.py -cfg configs/segformer_mitb5_StableST_G2C.yaml OUTPUT_DIR results/G2C_StableST_Segf_mitb5/ resume pretrain/G2C_model_iter020000_Segf_mitb5.pth
 ```
 G2B model adaptation
 
 ```
-python train_stable_st.py -cfg configs/deeplabv2_r101_stable_st_BDD.yaml OUTPUT_DIR results/BDD_stable_st/ resume ./pretrain/G2C_model_iter020000.pth
+python train_stable_st.py -cfg configs/deeplabv2_r101_dtst_BDD.yaml OUTPUT_DIR results/BDD_StableST/ resume pretrain/G2C_model_iter020000.pth 
 ```
 
-C2A (Cityscapes -> ACDC) model adaptation
 
+Besides, we still support the Segformer-B5 in StableSt.
+For G2C using segformer_mitb5:
 ```
-python train_stable_st.py -cfg configs/deeplabv2_r101_stable_st_ACDC.yaml OUTPUT_DIR results/ACDC_stable_st/ resume ./pretrain/Cityscaes_model_iter020000.pth
+CUDA_VISIBLE_DEVICES=3 nohup python train_stable_st.py -cfg configs/segformer_mitb5_StableST_G2C.yaml OUTPUT_DIR results/G2C_StableST_Segf_mitb5/ resume pretrain/G2C_model_iter020000_Segf_mitb5.pth > logs/G2C_StableST_Segf_mitb5.file 2>&1 &
 ```
+
+For S2C using segformer_mitb5:
+```
+python train_stable_st.py -cfg configs/deeplabv2_r101_StableST_G2C.yaml OUTPUT_DIR results/G2C_StableST/ resume pretrain/G2C_model_iter020000.pth
+```
+
 
 ### Evaluate
 ```
-python test.py -cfg configs/deeplabv2_r101_stable_st.yaml resume results/gta_stable_st/model_iter020000.pth
+# test synthia
+CUDA_VISIBLE_DEVICES=3 nohup python test.py -cfg configs/eval_synthia_16.yaml resume ../DTST/results/synthia_HARD_PL_DTST/model_iter010999.pth > logs/eval_synthia 2>&1 &
+# test gta pretrain
+CUDA_VISIBLE_DEVICES=3 nohup python test.py -cfg configs/eval_gta_19.yaml resume ./pretrain/G2C_model_iter020000.pth > logs/eval_gta5_pretrain 2>&1 &
+# test synthia pretrain
+CUDA_VISIBLE_DEVICES=3 nohup python test.py -cfg configs/eval_synthia_16.yaml resume ./pretrain/S2C_Pretrain_NO_DG.pth > logs/eval_synthia_pretrain 2>&1 &
 ```
 
 - 
