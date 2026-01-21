@@ -44,18 +44,193 @@ pip install ninja yacs cython matplotlib tqdm opencv-python imageio mmcv
 conda install pytorch==1.2.0 torchvision==0.4.0 cudatoolkit=9.2 -c pytorch
 ```
 
-### Getting started
-Data:
-- Download [The Cityscapes Dataset]( https://www.cityscapes-dataset.com/ )
+## Getting Started
 
-The data folder should be structured as follows:
+### Data Preparation
+
+Please download and organize the datasets as follows.
+All datasets should be placed under the `data/` directory.
+
+---
+
+#### **Cityscapes**
+
+Please download `leftImg8bit_trainvaltest.zip` and `gt_trainvaltest.zip` from
+[https://www.cityscapes-dataset.com/downloads/](https://www.cityscapes-dataset.com/downloads/)
+
+Extract them to:
+
+```text
+data/cityscapes/
+├── leftImg8bit/
+│   ├── train/
+│   ├── val/
+│   └── test/
+└── gtFine/
+    ├── train/
+    ├── val/
+    └── test/
 ```
-├── datasets/
-│   ├── cityscapes/     
-|   |   ├── gtFine/
-|   |   ├── leftImg8bit/		
-...
+
+---
+
+#### **GTA5**
+
+Please download all GTA5 image and label packages from
+[https://download.visinf.tu-darmstadt.de/data/from_games/](https://download.visinf.tu-darmstadt.de/data/from_games/)
+
+Extract them to:
+
+```text
+data/GTA5/GTAV/
+├── images/
+└── labels/
 ```
+
+---
+
+#### **ACDC**
+
+Please download `rgb_anon_trainvaltest.zip` and `gt_trainval.zip` from
+[https://acdc.vision.ee.ethz.ch/download](https://acdc.vision.ee.ethz.ch/download)
+
+Extract them to `data/ACDC/`.
+The original directory structure follows `condition/split/sequence/`.
+Please reorganize it into a flat `split/` layout as below:
+
+```text
+data/ACDC/
+├── rgb_anon/
+│   ├── train/
+│   └── val/
+└── gt/
+    ├── train/
+    └── val/
+```
+
+---
+
+#### **BDD100K**
+
+Please download **10K Images** and **Segmentation** from
+[https://bdd-data.berkeley.edu/portal.html#download](https://bdd-data.berkeley.edu/portal.html#download)
+
+Extract them to:
+
+```text
+data/BDD/bdd100k/
+├── images/10k/
+│   ├── train/
+│   └── val/
+└── labels/sem_seg/masks/
+    ├── train/
+    └── val/
+```
+
+---
+
+#### **Mapillary Vistas**
+
+Please download `mapillary-vistas-dataset_public_v1.2.zip` from
+[https://www.mapillary.com/dataset/vistas](https://www.mapillary.com/dataset/vistas)
+
+Extract it to:
+
+```text
+data/mapillary/
+```
+
+---
+
+#### **EndoScene**
+
+Please download the EndoScene dataset from
+[https://service.tib.eu/ldmservice/dataset/endoscene](https://service.tib.eu/ldmservice/dataset/endoscene)
+
+Organize it as:
+
+```text
+data/EndoScene/
+├── images/
+│   ├── train/
+│   └── val/
+└── labels/
+    ├── train/
+    └── val/
+```
+
+---
+
+#### **ETIS-Larib**
+
+Please download the ETIS-Larib Polyp Dataset from
+[https://service.tib.eu/ldmservice/dataset/etis-larib-polyp-db](https://service.tib.eu/ldmservice/dataset/etis-larib-polyp-db)
+
+Organize it as:
+
+```text
+data/ETIS-Larib/
+├── images/
+│   ├── train/
+│   └── val/
+└── labels/
+    ├── train/
+    └── val/
+```
+
+---
+
+#### **Potsdam & Vaihingen**
+
+Please download the ISPRS 2D Semantic Labeling datasets:
+
+* Potsdam: [https://www.isprs.org/resources/datasets/benchmarks/UrbanSemLab/2d-sem-label-potsdam.aspx](https://www.isprs.org/resources/datasets/benchmarks/UrbanSemLab/2d-sem-label-potsdam.aspx)
+* Vaihingen: [https://www.isprs.org/resources/datasets/benchmarks/UrbanSemLab/2d-sem-label-vaihingen.aspx](https://www.isprs.org/resources/datasets/benchmarks/UrbanSemLab/2d-sem-label-vaihingen.aspx)
+
+Organize them as:
+
+```text
+data/potsdam/
+├── train_images/
+├── train_gt/
+├── val_images/
+└── val_gt/
+
+data/vaihingen/
+├── train_images/
+├── train_gt/
+├── val_images/
+└── val_gt/
+```
+
+### 19-Class Label Conversion (Optional)
+
+For experiments based on the Cityscapes 19-class setting, please convert the datasets using:
+
+```bash
+python tools/convert_datasets_to19/gta.py data/GTA5/GTAV
+python tools/convert_datasets_to19/cityscapes.py data/cityscapes
+python tools/convert_datasets_to19/mapillary.py data/mapillary
+```
+
+After conversion, the expected structure is:
+
+```text
+data/
+├── GTA5/GTAV/
+│   ├── images/
+│   └── labels_19/
+├── cityscapes/
+│   ├── leftImg8bit/
+│   └── gtFine_19/
+├── BDD/
+├── ACDC/
+├── EndoScene/
+├── ETIS-Larib/
+├── potsdam/
+└── vaihingen/
+```
+
 Pretrain models:
 - Download pretrained model on GTA5: ([GTA5](https://drive.google.com/file/d/1fZ1uAPxUxPaWQrjBwZ6qkwsY3n2odqYd/view?usp=drive_link)) 
 - Download pretrained model on SYNTHIA: ([SYNTHIA ](https://drive.google.com/file/d/1380-cAcVxIgyhKWHtf5IGkGbdQGZ7Gzb/view?usp=drive_link))
