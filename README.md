@@ -203,7 +203,7 @@ data/vaihingen/
 └── val_gt/
 ```
 
-### 19-Class Label Conversion (Optional)
+### 19-Class Label Conversion
 
 For experiments based on the Cityscapes 19-class setting, please convert the datasets using:
 
@@ -274,5 +274,3 @@ CUDA_VISIBLE_DEVICES=3 nohup python test.py -cfg configs/eval_gta_19.yaml resume
 # test synthia pretrain
 CUDA_VISIBLE_DEVICES=3 nohup python test.py -cfg configs/eval_synthia_16.yaml resume ./pretrain/S2C_Pretrain_NO_DG.pth > logs/eval_synthia_pretrain 2>&1 &
 ```
-
-- 
