@@ -218,11 +218,6 @@ data/
 └── vaihingen/
 ```
 
-Pretrain models:
-- Download pretrained model on GTA5: ([GTA5](https://drive.google.com/file/d/1fZ1uAPxUxPaWQrjBwZ6qkwsY3n2odqYd/view?usp=drive_link)) 
-- Download pretrained model on SYNTHIA: ([SYNTHIA ](https://drive.google.com/file/d/1380-cAcVxIgyhKWHtf5IGkGbdQGZ7Gzb/view?usp=drive_link))
-Then, put these *.pth into the pretrain folder.
-
 ### Train
 G2C model adaptation
 ```
@@ -249,6 +244,18 @@ CUDA_VISIBLE_DEVICES=3 nohup python train_stable_st.py -cfg configs/segformer_mi
 For S2C using segformer_mitb5:
 ```
 python train_stable_st.py -cfg configs/deeplabv2_r101_StableST_G2C.yaml OUTPUT_DIR results/G2C_StableST/ resume pretrain/G2C_model_iter020000.pth
+```
+
+For G2C using dinoV2_L:
+```
+python train_lora.py -cfg configs/DinoV2_L_adaptor.yaml OUTPUT_DIR results/DinoV2_L_adaptor
+python train_stable_st.py -cfg configs/DinoV2_L_G2C.yaml OUTPUT_DIR results/G2C_StableST_DinoV2_L_adaptor/ resume results/DinoV2_L_adaptor/G_model_iter020000.pth
+```
+
+For E2E in Medical images:
+```
+python train.py -cfg configs/DinoV2_L_adaptor.yaml OUTPUT_DIR results/DinoV2_L_adaptor
+python train_stable_st.py -cfg configs/DinoV2_L_G2C.yaml OUTPUT_DIR results/G2C_StableST_DinoV2_L_adaptor/ resume results/DinoV2_L_adaptor/G_model_iter020000.pth
 ```
 
 
