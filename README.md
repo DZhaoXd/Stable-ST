@@ -5,19 +5,6 @@ This is a pytorch implementation of Stable-ST.
 
 Stable-ST, a unified framework based on stable sample self-training, incorporates two key technologies: [Dynamic Teacher Update](https://openaccess.thecvf.com/content/CVPR2023/papers/Zhao_Towards_Better_Stability_and_Adaptability_Improve_Online_Self-Training_for_Model_CVPR_2023_paper.pdf)(CVPR-23 Highlight) and [Stable Neighbor Denoising](https://openaccess.thecvf.com/content/CVPR2024/papers/Zhao_Stable_Neighbor_Denoising_for_Source-free_Domain_Adaptive_Segmentation_CVPR_2024_paper.pdf)(CVPR-24). 
 
-### New perspective
-1. We seamlessly integrate the Dynamic Teacher Update mechanism and the Stable Neighbor Denoising technique into a unified framework, Stable-ST. This unified framework allows us to jointly enhance the stability and adaptability of the model in SFDA segmentation tasks.  Moreover, most of the terminology, as well as all figures and experiments, have been reorganized and rewritten to align with the proposed Stable-ST. 
-
-2. We provide a more thorough analysis and experimental validation of the error accumulation issue in self-training for source-free domain adaptation (SFDA) in semantic segmentation tasks,
-
-3. We delve deeper into the DTU technique from stable samples.
-
-4. We provide more detailed experimental support for the neighbor retrieval scheme in the SND technique.
-
-5. We further validate the effectiveness of our method in more realistic SFDA scenarios, including continual SFDA, medical imaging, and remote sensing.
-
-
-
 ### Prerequisites
 - Python 3.6
 - Pytorch 1.2.0
