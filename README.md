@@ -249,22 +249,24 @@ python train_stable_st.py -cfg configs/deeplabv2_r101_StableST_G2C.yaml OUTPUT_D
 For G2C using dinoV2_L:
 ```
 python train_lora.py -cfg configs/DinoV2_L_adaptor.yaml OUTPUT_DIR results/DinoV2_L_adaptor
-python train_stable_st.py -cfg configs/DinoV2_L_G2C.yaml OUTPUT_DIR results/G2C_StableST_DinoV2_L_adaptor/ resume results/DinoV2_L_adaptor/G_model_iter020000.pth
+python train_stable_st.py -cfg configs/DinoV2_L_G2C.yaml OUTPUT_DIR results/G2C_StableST_DinoV2_L_adaptor/ resume results/DinoV2_L_adaptor/G_model_iter08000.pth
 ```
 
 For E2E in Medical images:
 ```
-python train.py -cfg configs/DinoV2_L_adaptor.yaml OUTPUT_DIR results/DinoV2_L_adaptor
-python train_stable_st.py -cfg configs/DinoV2_L_G2C.yaml OUTPUT_DIR results/G2C_StableST_DinoV2_L_adaptor/ resume results/DinoV2_L_adaptor/G_model_iter020000.pth
+python train_src.py -cfg configs/deeplabv2_ur101_src_medical.yaml OUTPUT_DIR results/src_medical/
+python train_stable_st.py -cfg configs/deeplabv2_r101_StableST_E2E.yaml OUTPUT_DIR results/E2E_StableST/ resume results/src_medical/E_model_iter004000.pth
 ```
+
+For P2V in Medical images:
+```
+python train_src.py -cfg configs/deeplabv2_ur101_src_remote.yaml OUTPUT_DIR results/src_remote/
+python train_stable_st.py -cfg configs/deeplabv2_r101_StableST_P2V.yaml OUTPUT_DIR results/P2V_StableST/ resume results/src_medical/E_model_iter0010000.pth
+```
+
 
 
 ### Evaluate
 ```
-# test synthia
-CUDA_VISIBLE_DEVICES=3 nohup python test.py -cfg configs/eval_synthia_16.yaml resume ../DTST/results/synthia_HARD_PL_DTST/model_iter010999.pth > logs/eval_synthia 2>&1 &
-# test gta pretrain
-CUDA_VISIBLE_DEVICES=3 nohup python test.py -cfg configs/eval_gta_19.yaml resume ./pretrain/G2C_model_iter020000.pth > logs/eval_gta5_pretrain 2>&1 &
-# test synthia pretrain
-CUDA_VISIBLE_DEVICES=3 nohup python test.py -cfg configs/eval_synthia_16.yaml resume ./pretrain/S2C_Pretrain_NO_DG.pth > logs/eval_synthia_pretrain 2>&1 &
+CUDA_VISIBLE_DEVICES=3 nohup python test.py -cfg configs/eval_synthia_16.yaml resume  ./results/exp/model_iter010999.pth  
 ```
