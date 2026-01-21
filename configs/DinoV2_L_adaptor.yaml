@@ -1,0 +1,42 @@
+MODEL:
+  NAME: "segformer_mitbx"
+  WEIGHTS:
+  FREEZE_BN: True
+DATASETS:
+  SOURCE_TRAIN: "gta5_train"
+  TEST: "cityscapes_val"
+INPUT:
+  SOURCE_INPUT_SIZE_TRAIN: (504, 770)   # patch=14 对齐的训练尺寸
+  TARGET_INPUT_SIZE_TRAIN: (504, 770)   # 建议加上 target 一起对齐
+  # 随机面积比例 & 随机纵横比范围
+  RRC_SCALE: (0.75, 1.25)   # 原来 INPUT_SCALES_TRAIN 的范围可以直接放到这里
+  RRC_RATIO: (0.66, 2.0)    # 默认值，可以根据需要调节
+  # ViT patch 对齐
+  PATCH_MULTIPLE: 14
+  # 颜色增强（只在 source 端使用）
+  BRIGHTNESS: 0.5
+  CONTRAST: 0.5
+  SATURATION: 0.5
+  HUE: 0.2
+  HORIZONTAL_FLIP_PROB_TRAIN: 0.5   # 可以设 0.5 更通用
+SOLVER:
+  BASE_LR: 5e-4
+  MAX_ITER: 14000
+  STOP_ITER: 14000
+  BATCH_SIZE: 2
+  CHECKPOINT_PERIOD: 2000
+TEST:
+  SLIDE_STRIDE: (512,1024)
+  SLIDE_WINDOW: (512, 1024)
+  SIZE_TEST: (768, 1536)
+DINOV2ADAPTER:
+  #MODEL_NAME: "dinov2_vitl14_reg"   # 或 dinov2_vitl14 
+  MODEL_NAME: "dinov2_vitl14"   # 或 dinov2_vitl14 
+  HUB_DIR: "dinov2-main/"
+  LORA_R: 6
+  LORA_ALPHA: 16
+  LORA_DROPOUT: 0.0
+  FREEZE_BACKBONE: true
+  HEAD_LR_MULT: 1.0
+  LORA_LR_MULT: 0.4
+
